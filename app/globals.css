@@ -1,0 +1,42 @@
+:root {
+  --primary-color: #098290;
+  --selected-color: #06707b;
+  --secondary-color: #f6ffed;
+  --font-size: 16px;
+  --border-radius: 4px;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito"), url(./Nunito-Regular.ttf) format("truetype");
+}
+
+* {
+  font-family: "Nunito" !important;
+}
+
+a > .ant-card {
+  background-color: var(--primary-color) !important;
+  box-shadow: 0 0 3px grey !important;
+  border: 0px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out; /* Define transition properties and duration */
+}
+a > .ant-card:hover {
+  /* Customize hover styles here (e.g., background-color, transform) */
+  background-color: #ddd; /* Example: change background on hover */
+  transform: scale(1.02); /* Example: slight scale on hover */
+}
+
+.ant-menu-item-selected,
+.ant-menu-sub {
+  background-color: var(--selected-color) !important;
+}
+
+.ant-btn-primary {
+  box-shadow: 0px 0px !important;
+}
+
+
+
+
