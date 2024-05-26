@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [Authed, setAuthed] = useState("");
+  const [Authed, setAuthed] = useState("true");
   const [loading, setLoading] = useState(true);
   const [cookies, setCookies] = useCookies(["token", "loading"]);
 
