@@ -49,8 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               borderRadius: 5,
             },
           }}>
-          {Authed === "false" && <Login />}
-          {Authed === "true" && (
+          {true && (
             <Layout hasSider style={{ minHeight: "100vh" }}>
               <SideBar />
 
