@@ -1,6 +1,6 @@
 "use client";
 const PageName = "Logs";
-const api = "http://localhost:3001";
+const api = "http://localhost:3000/api";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
@@ -84,8 +84,9 @@ export default function App() {
   ];
 
   useEffect(() => {
-    if(window.location.pathname === '/logs'){
-    setCookies("loading", false);}
+    if (window.location.pathname === "/logs") {
+      setCookies("loading", false);
+    }
 
     getUsers();
     getData();
@@ -120,19 +121,21 @@ export default function App() {
     const fromDate = new Date(searchTime.from);
     const toDate = new Date(searchTime.to);
 
-    const filtered = allLogsData.filter((log:any) => {
-      const searchTextLower = searchText.toLowerCase(); // Case-insensitive search for general text
-      const searchUserNameLower = searchUserName.toLowerCase(); // Case-insensitive search for username
-      const logTime = new Date(log.time); // Convert log time to Date object
+    const filtered = allLogsData.filter((log: any) => {
+      try {
+        const searchTextLower = searchText.toLowerCase(); // Case-insensitive search for general text
+        const searchUserNameLower = searchUserName.toLowerCase(); // Case-insensitive search for username
+        const logTime = new Date(log.time); // Convert log time to Date object
 
-      const matchesText = log.userName.toLowerCase().includes(searchTextLower) || log.log.toLowerCase().includes(searchTextLower);
+        const matchesText = log.userName.toLowerCase().includes(searchTextLower) || log.log.toLowerCase().includes(searchTextLower);
 
-      const matchesUserName = log.userName.toLowerCase().includes(searchUserNameLower);
+        const matchesUserName = log.userName.toLowerCase().includes(searchUserNameLower);
 
-      let matchesTime = true; // to search time only if select range else return all
-      if (searchTime.from && searchTime.to) matchesTime = logTime >= fromDate && logTime <= toDate;
+        let matchesTime = true; // to search time only if select range else return all
+        if (searchTime.from && searchTime.to) matchesTime = logTime >= fromDate && logTime <= toDate;
 
-      return matchesText && matchesUserName && matchesTime;
+        return matchesText && matchesUserName && matchesTime;
+      } catch (error) {}
     });
 
     setFilteredData(filtered);

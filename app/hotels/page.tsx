@@ -13,7 +13,7 @@ import { DeleteOutlined, EditOutlined, SaveOutlined, CloseOutlined } from "@ant-
 import { FaPrint } from "react-icons/fa6";
 
 //Styling
-import { Alert, Button, Card, Checkbox, Divider, Form, Input, Modal, Popconfirm, Result, Table, TableColumnsType, message } from "antd";
+import { Alert, Button, Card, Checkbox, Col, Divider, Form, Input, Modal, Popconfirm, Result, Row, Table, TableColumnsType, message } from "antd";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function App() {
@@ -97,7 +97,7 @@ export default function App() {
     },
   ];
 
-  const formFields = fields.filter((field) => field.name !== "user" );
+  const formFields = fields.filter((field) => field.name !== "user");
 
   useEffect(() => {
     getData();
@@ -114,7 +114,6 @@ export default function App() {
     } finally {
       setLoading(false);
       setCookies("loading", false);
-
     }
   }
 
@@ -124,7 +123,7 @@ export default function App() {
 
     let searchMatches = false;
     fields.forEach((field) => {
-      const hotelValue:any = hotel[field.name];
+      const hotelValue: any = hotel[field.name];
       if (typeof hotelValue === "string" && hotelValue.toLowerCase().includes(searchTextLower)) {
         searchMatches = true;
         return;
@@ -228,7 +227,7 @@ export default function App() {
 
   const handleInputChange = useCallback(
     (field: any) => (e: any) => {
-      setHotelData((prevData:any) => ({ ...prevData, [field]: e.target.value }));
+      setHotelData((prevData: any) => ({ ...prevData, [field]: e.target.value }));
     },
     []
   );
@@ -242,25 +241,27 @@ export default function App() {
         title={modalTitle}
         open={isModalOpen}
         onCancel={handleCancel}
-        style={{ maxWidth: 400, paddingBottom: 0 }}
+        width={1300}
         maskClosable={false} //not close by click out of modal
         footer={[]}>
-        <Card
-          style={{
-            padding: 5,
-            margin: 0,
-            paddingBottom: 0,
-          }}>
-          <Form form={form} layout='vertical' style={{ maxWidth: 600, textAlign: "center" }} validateMessages={validateMessages} onFinish={handleOk}>
+        <Card>
+
+          <Form form={form} layout='vertical' style={{ textAlign: "center" }} validateMessages={validateMessages} onFinish={handleOk}>
+          <Row>
             {formFields.map((field) => (
-              <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
-                {field.type ? (
-                  <Input onChange={handleInputChange(field.name)} type={field.type} />
-                ) : (
-                  <Input onChange={handleInputChange(field.name)} />
-                )}
-              </Form.Item>
+             
+                <Col key={field.name} xs={{ flex: "100%" }} sm={{ flex: "50%" }} md={{ flex: "40%" }} lg={{ flex: "20%" }}  style={{padding:5}} >
+                  <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
+                    {field.type ? (
+                      <Input onChange={handleInputChange(field.name)} type={field.type} />
+                    ) : (
+                      <Input onChange={handleInputChange(field.name)} />
+                    )}
+                  </Form.Item>
+                </Col>
+              
             ))}
+            </Row>
             <Divider />
             <Form.Item style={{ marginBottom: -40, textAlign: "right" }}>
               <Button onClick={handleCancel} icon={<CloseOutlined />} />
@@ -287,7 +288,6 @@ export default function App() {
             <Button type='text' title='Add' onClick={showModal} icon={<BsPlusLg size={"1em"} />}></Button>
           </>
         }>
-        
         {!Errors.connectionError && (
           <>
             <Input.Search placeholder='Search...' onChange={(e) => setSearchText(e.target.value)} style={{ paddingBottom: 5 }} allowClear />

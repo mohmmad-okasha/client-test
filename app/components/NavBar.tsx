@@ -26,15 +26,14 @@ export default function App() {
           top: 0,
           zIndex: 1,
           textAlign: "right",
-          marginLeft: -30,
           background: colorBgContainer,
           boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.05)",
         }}>
         <Row>
-          <Col span={8} style={{ padding: 15 }}>
+          {/* <Col span={8} style={{ padding: 15 }}>
             <Input.Search placeholder='Search...'  allowClear />
-          </Col>
-          <Col span={8} offset={8}>
+          </Col> */}
+          <Col span={8} offset={16}>
             <Button onClick={logout} icon={<PoweroffOutlined />} />
           </Col>
         </Row>

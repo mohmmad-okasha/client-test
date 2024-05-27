@@ -32,7 +32,7 @@ export default function App() {
   const [_, setCookies] = useCookies(["token"]); //to check login
 
   const onFinish = async () => {
-    const response = await axios.post("http://localhost:3001/login", {
+    const response = await axios.post("http://localhost:3000/api/login", {
       name,
       password,
     });

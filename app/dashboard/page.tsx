@@ -28,7 +28,7 @@ export default function App() {
 
       <Row gutter={12}>
         {Object.keys(btns).map((key:any) => (
-          <Col key={key} xs={{ flex: "100%" }} sm={{ flex: "30%" }} lg={{ flex: "30%" }} xl={{ flex: "20%" }}>
+          <Col style={{padding:5}} key={key} xs={{ flex: "100%" }} sm={{ flex: "30%" }} lg={{ flex: "30%" }} xl={{ flex: "20%" }}>
             <Link className='animated-button' onClick={() => setCookies("loading", true)} href={btns[key].url}>
               <Card
                 bordered={true}

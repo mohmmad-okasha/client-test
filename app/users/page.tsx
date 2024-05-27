@@ -1,6 +1,6 @@
 "use client";
 const PageName = "Users";
-const api = "http://localhost:3001";
+const api = "http://localhost:3000/api";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
@@ -322,15 +322,10 @@ export default function App() {
         title={modalTitle}
         open={isModalOpen}
         onCancel={handleCancel}
-        style={{ maxWidth: 400, paddingBottom: 0 }}
+        width={400}
         maskClosable={false} //not close by click out of modal
         footer={[]}>
-        <Card
-          style={{
-            padding: 5,
-            margin: 0,
-            paddingBottom: 0,
-          }}>
+        <Card>
           {/* <Form form={form} layout='vertical' style={{ maxWidth: 600, textAlign: "center" }} validateMessages={validateMessages} onFinish={handleOk}>
             <Form.Item label='Name' name='name' rules={[{ required: true }]}>
               <Input onChange={handleInputChange("name")} />

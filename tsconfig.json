@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "types": ["jsonwebtoken"],
+
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

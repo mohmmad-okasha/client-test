@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const api = "http://localhost:3001";
+const api = "http://localhost:3000/api";
 
 export const saveLog = async (log: string) => {
   const response = await Axios.post(`${api}/logs`, {

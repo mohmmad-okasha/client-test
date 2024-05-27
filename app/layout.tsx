@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [Authed, setAuthed] = useState("true");
+  const [Authed, setAuthed] = useState("");
   const [loading, setLoading] = useState(true);
   const [cookies, setCookies] = useCookies(["token", "loading"]);
 
@@ -49,11 +49,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               borderRadius: 5,
             },
           }}>
-          {true && (
+          {Authed === "false" && <Login />}
+          {Authed === "true" && (
             <Layout hasSider style={{ minHeight: "100vh" }}>
               <SideBar />
 
-              <Layout style={{ marginLeft: 30 }}>
+              <Layout>
                 <NavBar />
                 <br />
                 <Content
@@ -66,8 +67,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   }}>
                   {loading && (
                     <>
-                      <Flex style={{ minHeight: "100vh" }} gap='center' align='center' justify='center' vertical>
-                        <Spin fullscreen tip='Loading' size='large' style={{ fontSize: "15vh" }}></Spin>
+                      <Flex style={{ maxHeight: "100vh" }} gap='center' align='center' justify='center' vertical>
+                        <Spin fullscreen tip='Loading' size='large' style={{maxHeight: "100vh", fontSize: "15vh" }}></Spin>
                       </Flex>
                       <div style={{ display: "none" }}>{children}</div>
                     </>
