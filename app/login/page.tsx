@@ -1,24 +1,13 @@
 "use client";
-import '../globals.css'
+import "../globals.css";
 
 import React, { useState } from "react";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import {
-  Alert,
-  Avatar,
-  Button,
-  Card,
-  ConfigProvider,
-  Flex,
-  Form,
-  FormProps,
-  Input,
-  Layout,
-  theme,
-} from "antd";
+import { Alert, Avatar, Button, Card, ConfigProvider, Flex, Form, FormProps, Input, Layout, theme } from "antd";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { LuFingerprint } from "react-icons/lu";
+import { api } from "@/app/shared";
 
 type FieldType = {
   username?: string;
@@ -32,7 +21,7 @@ export default function App() {
   const [_, setCookies] = useCookies(["token"]); //to check login
 
   const onFinish = async () => {
-    const response = await axios.post("http://localhost:3000/api/login", {
+    const response = await axios.post(api.url + "/login", {
       name,
       password,
     });
@@ -47,63 +36,46 @@ export default function App() {
 
   return (
     <ConfigProvider>
-      
       <Layout
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-        }}
-      >
+        }}>
         <div style={{ width: "30vh" }}>
-          <Flex justify="center" align="middle">
-          <LuFingerprint  size="5em" color="#098290" />
+          <Flex justify='center' align='middle'>
+            <LuFingerprint size='5em' color='#098290' />
           </Flex>
           <br />
           <br />
-          <Form name="normal_login" className="login-form" onFinish={onFinish}>
-            <Form.Item
-              name="username"
-              rules={[
-                { required: true, message: "Please input your Username!" },
-              ]}
-            >
+          <Form name='normal_login' className='login-form' onFinish={onFinish}>
+            <Form.Item name='username' rules={[{ required: true, message: "Please input your Username!" }]}>
               <Input
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Username"
+                prefix={<UserOutlined className='site-form-item-icon' />}
+                placeholder='Username'
               />
             </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                { required: true, message: "Please input your Password!" },
-              ]}
-            >
+            <Form.Item name='password' rules={[{ required: true, message: "Please input your Password!" }]}>
               <Input
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
+                prefix={<LockOutlined className='site-form-item-icon' />}
+                type='password'
+                placeholder='Password'
               />
             </Form.Item>
 
-            <Button
-              block
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
+            <Button block type='primary' htmlType='submit' className='login-form-button'>
               Log in
             </Button>
           </Form>
           <br />
-          {errors && <Alert description={errors} type="error" showIcon />}
+          {errors && <Alert description={errors} type='error' showIcon />}
         </div>
       </Layout>
     </ConfigProvider>

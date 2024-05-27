@@ -1,6 +1,5 @@
 "use client";
 const PageName = "Logs";
-const api = "http://localhost:3000/api";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
@@ -32,6 +31,7 @@ import {
   DatePickerProps,
 } from "antd";
 import toast, { Toaster } from "react-hot-toast";
+import { api } from "@/app/shared";
 
 interface DataType {
   key: React.Key;
@@ -95,7 +95,7 @@ export default function App() {
   async function getData() {
     setLoading(true);
     try {
-      const response = await Axios.get(`${api}/logs`);
+      const response = await Axios.get(`${api.url}/logs`);
       setAllLogsData(response.data);
     } catch (error) {
       setErrors({ ...Errors, connectionError: error });
@@ -108,7 +108,7 @@ export default function App() {
   async function getUsers() {
     setLoading(true);
     try {
-      const response = await Axios.get(`${api}/users/list`);
+      const response = await Axios.get(`${api.url}/users/list`);
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);

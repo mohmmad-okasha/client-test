@@ -1,6 +1,6 @@
 "use client";
 const PageName = "Users";
-const api = "http://localhost:3000/api";
+import { api } from "@/app/shared";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
@@ -186,7 +186,7 @@ export default function App() {
   async function getData() {
     setLoading(true);
     try {
-      const response = await Axios.get(`${api}/users`);
+      const response = await Axios.get(`${api.url}/users`);
       setAllUsersData(response.data);
     } catch (error) {
       setErrors({ ...Errors, connectionError: error });
@@ -209,7 +209,7 @@ export default function App() {
   });
   async function save() {
     setErrors({ ...Errors, saveErrors: "" });
-    const response = await Axios.post(`${api}/users`, {
+    const response = await Axios.post(`${api.url}/users`, {
       name: userData.name,
       email: userData.email,
       password: userData.password,
@@ -231,7 +231,7 @@ export default function App() {
   }
   async function update() {
     setErrors({ ...Errors, saveErrors: "" });
-    const response = await Axios.put(`${api}/users`, {
+    const response = await Axios.put(`${api.url}/users`, {
       _id: userData._id,
       name: form.getFieldValue("name"),
       email: form.getFieldValue("email"),
@@ -253,7 +253,7 @@ export default function App() {
     }
   }
   async function remove(id: string) {
-    Axios.delete(`${api}/users/${id}`).then((res) => {
+    Axios.delete(`${api.url}/users/${id}`).then((res) => {
       saveLog("remove user: " + userData.name);
       getData();
       message.success("Removed");
