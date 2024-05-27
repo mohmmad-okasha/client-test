@@ -3,9 +3,13 @@ import Axios from "axios";
 //const api = "http://localhost:3000/api";
 
 import { useRouter } from "next/router";
+const router = useRouter();
+
+const currentUrl = router.asPath;
+const baseUrl = currentUrl.split('/').slice(0, 3).join('/');
 
 export const api ={
-url: new URL(window.location.href).origin+"/api"
+url: new URL(baseUrl+"/api")
 }
 
 export const saveLog = async (log: string) => {
